@@ -32,6 +32,10 @@ public class OthelloAI {
 
 	}
 	
+	/**
+	 * Creates a new OthelloAI using the given link for communication.
+	 * @param link Link for communications
+	 */
 	public OthelloAI(CommLink link) {
 		
 		this.link = link;
@@ -42,7 +46,7 @@ public class OthelloAI {
 		
 		//Start all required threads after initializing
 		new Thread(inputListener).start();
-		
+		new Thread(aiThread).start();
 		
 		//Inform host that init is done
 		link.sendInitDone();
@@ -50,7 +54,9 @@ public class OthelloAI {
 	}
 
 	/**
-	 * Indicates that a move has been made, and that 
+	 * Indicates that a move has been made, and that the ideal next move needs to be altered.
+	 * 
+	 * This should cause the AI to reevaluate everything it is doing.
 	 */
 	public void boardChanged() {
 		
@@ -63,9 +69,13 @@ public class OthelloAI {
 	}
 	
 	/**
-	 * Manages helper threads, and insures things keep running smoothly.
+	 * Manages helper threads, and ensures things keep running smoothly.
 	 * 
-	 * 
+	 * This thread does the following:
+	 * -Detects a board piece change, and stops all jobs to give them new tasks and modify the DecisionTree
+	 * -Gives jobs to finished threads
+	 * -Begins/ends computation
+	 * -Keeps track of detected strategy
 	 * 
 	 * @author Francesco
 	 *
@@ -73,15 +83,31 @@ public class OthelloAI {
 	private class AIThread implements Runnable {
 		
 		private OthelloAI othelloAI;
+		private boolean stop;
 
 		public AIThread(OthelloAI othelloAI) {
 			this.othelloAI = othelloAI;
+			stop = false;
 		}
 
 		@Override
 		public void run() {
-			// TODO Auto-generated method stub
 			
+			while(!stop) {
+				
+				
+				
+				
+				
+			}
+			
+		}
+		
+		/**
+		 * Cease execution of the AI thread
+		 */
+		public void stop(){
+			stop = true;
 		}
 	}
 

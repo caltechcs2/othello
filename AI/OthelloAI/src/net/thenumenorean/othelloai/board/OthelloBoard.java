@@ -9,6 +9,8 @@ import java.util.BitSet;
 public class OthelloBoard {
 
 	/**
+	 * Represents a player in Othello
+	 * 
 	 * @author Francesco
 	 *
 	 */
